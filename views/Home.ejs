@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="make-centered">
+    <div id="container">
+        <header>TODO App</header>
+        <div id="input-section" class="box-fit">
+            <div class="description box-fit">
+                <label for="description">DESCRIPTION</label>
+                <input type="text" name="description" id="description-input" placeholder="What do you need to do?"
+                    required>
+            </div>
+            <div class="category box-fit" id="drop-down">
+                <div class="category-left">
+                    <label for="">CATEGORY</label>
+                    <div>Choose a category</div>
+                </div>
+
+                <div class="category-right">
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+            </div>
+            <div class="calender box-fit">
+                <label for="date">Due Date</label> <br>
+                <input type="date" name="date" id="date">
+            </div>
+
+            <div class="actions box-fit make-centered">
+                <div class="category-list visible-none" id="categoryList">
+                    <ul>
+                        <li class="category-item">PERSONAL</li>
+                        <li class="category-item">EDUCATION</li>
+                        <li class="category-item">WORK</li>
+                        <li class="category-item">SCHOOL</li>
+                        <li class="category-item">OTHER</li>
+                    </ul>
+                </div>
+                <button class="bg-dark-blue" id="add-task"><i class="fa-solid fa-plus mg-r"></i>&nbsp;&nbsp;ADD
+                    TASK</button>
+                <button class="bg-red" id="delete-task"><i class="fa-regular fa-trash-can"></i>&nbsp;&nbsp;DELETE
+                    TASK</button>
+            </div>
+        </div>
+        <div id="list-section" class="box-fit">
+            <ul>
+                <% for(const item of tasks_list) { %>
+                    <li>
+                        <div class="list-left">
+                            <input type="checkbox" class="checkTask" id="<%= item.id %>">
+                            <div class="list-task-description">
+                                <div class="task-name">
+                                    <%= item.description %>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-calendar-days"></i> &nbsp; &nbsp;
+                                    <%= `${new Date(item.date).getDate()}/${new Date(item.date).getMonth() + 1}/${new
+                                        Date(item.date).getFullYear()}` %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="<%= item.category %>">
+                            <%= item.category %>
+                        </div>
+                    </li>
+                    <% } %>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
